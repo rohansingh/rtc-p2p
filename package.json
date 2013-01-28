@@ -1,0 +1,22 @@
+{
+  "name": "rtc-p2p",
+  "description": "example of using WebRTC for P2P file sharing",
+  "version": "0.1.0",
+  "engines": {
+    "node": "0.8.x"
+  },
+  "dependencies": {
+    "socket.io": "0.9.x",
+    "node-uuid": "1.4.x"
+  },
+  "scripts": {
+    "start": "server.js"
+  },
+  "author": "Rohan Singh",
+  "contributors": [
+    {
+      "name": "Rohan Singh",
+      "email": "rohan@washington.edu"
+    }
+  ]
+}
