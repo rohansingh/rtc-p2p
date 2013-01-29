@@ -48,11 +48,11 @@ Files are transferred directly between peers, but a server is needed for
 two things:
 
 1. WebRTC requires a server or some sort of intermediary to exchange
-   signalling and session data. This must be done before a connection
+   signaling and session data. This must be done before a connection
    between two peers can be established.
 
    In this case, each peer communicates with the server using WebSockets to
-   exchange signalling data with other peers.
+   exchange signaling data with other peers.
 
 2. rtc-p2p uses a [web worker](http://en.wikipedia.org/wiki/Web_worker) to
    compute the SHA1 hashes of registered files in the background. Web
