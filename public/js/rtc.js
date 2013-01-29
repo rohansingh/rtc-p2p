@@ -70,10 +70,6 @@ socket.on('answer', function (data) {
   peers[data.from].setRemoteDescription(new RTCSessionDescription(data.desc));
 });
 
-socket.on('disconnect', function (data) {
-  delete peers[data.from];
-});
-
 var handleMessage = function (event) {
   console.log(event);
 
