@@ -17,6 +17,17 @@ var iceCallback = function (event) {
   }
 };
 
+var getStateChangeCallback = function (peerId) {
+  return function (event) {
+    if ($('#clients .' + peerId).length == 0) {
+      $('<tr class="' + peerId + '"><td>' + peerId + '</td><td class="state"></td></tr>')
+        .appendTo('#clients');
+    }
+
+    $('#clients .' + peerId + ' .state').text(peers[peerId].readyState);
+  };
+};
+
 socket.on('candidate', function (data) {
   if (data.candidate && peers[data.from]) {
       console.log(data.candidate.candidate);
@@ -27,6 +38,7 @@ socket.on('candidate', function (data) {
 socket.on('new', function (data) {
   var pc1 = peers[data.from] = new RTCPeerConnection(servers, options);
   pc1.onicecandidate = iceCallback;
+  pc1.onstatechange = getStateChangeCallback(data.from);
 
   channels[data.from] = pc1.createDataChannel('sendDataChannel', { reliable: false });
   channels[data.from].onmessage = handleMessage;
@@ -40,6 +52,8 @@ socket.on('new', function (data) {
 socket.on('offer', function (data) {
   var pc2 = peers[data.from] = new RTCPeerConnection(servers, options);
   pc2.onicecandidate = iceCallback;
+  pc2.onstatechange = getStateChangeCallback(data.from);
+
   pc2.ondatachannel = function (event) {
     channels[data.from] = event.channel;
     channels[data.from].onmessage = handleMessage;
