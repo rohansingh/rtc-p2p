@@ -10,7 +10,7 @@
     "node-uuid": "1.4.x"
   },
   "scripts": {
-    "start": "server.js"
+    "start": "node server.js"
   },
   "author": "Rohan Singh",
   "contributors": [
