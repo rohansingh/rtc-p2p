@@ -89,13 +89,24 @@ var handleMessage = function (event) {
 };
 
 var handleFileRequest = function (channel, hash) {
-  var fileContents = files[hash];
-
-  if (fileContents) {
-    channel.send(JSON.stringify({
-      'op': 'file-data',
-      'hash': hash,
-      'contents': fileContents
-    }));
+  var file = files[hash];
+  if (!file) {
+    return;
   }
+
+  var fileReader = new FileReader();
+
+  fileReader.onload = function (event) {
+    fileContents = event.target.result;
+
+    if (fileContents) {
+      channel.send(JSON.stringify({
+        'op': 'file-data',
+        'hash': hash,
+        'contents': fileContents.substr(0, 50) // only support first 50 bytes for now
+      }));
+    }
+  };
+
+  fileReader.readAsText(file);
 };
