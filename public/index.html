@@ -55,7 +55,7 @@
           <thead>
             <tr>
               <th>Hash</th>
-              <th>Contents</th>
+              <th>Contents (Preview)</th>
             </tr>
           </thead>
           <tbody id="received"></tbody>
@@ -89,6 +89,7 @@
 
         $('#requestButton').click(function (event) {
           var hash = $('#requestHash').val();
+          $('#requestHash').val('');
           if (hash) {
             requestFile(hash);
           }
