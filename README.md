@@ -57,3 +57,8 @@ two things:
 2. rtc-p2p uses a [web worker](http://en.wikipedia.org/wiki/Web_worker) to
    compute the SHA1 hashes of registered files in the background. Web
    workers run on the client, but must be served from a server.
+
+Further Reading
+---------------
+Slides from my presentation on this project at [sthlm.js](http://www.meetup.com/sthlm-js/)
+are available at: [http://www.rvl.io/rohansingh/p2p](http://www.rvl.io/rohansingh/p2p)
