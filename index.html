@@ -20,14 +20,14 @@
         var peers = {};
         var channels = {};
 
+        var files = {
+          'abc': '12345'
+        };
+
         var iceCallback = function (event) {
           if (event.candidate) {
             socket.emit('candidate', { 'candidate': event.candidate });
           }
-        };
-
-        var channelMessageCallback = function (event) {
-          console.log(event);
         };
 
         socket.on('candidate', function (data) {
@@ -42,7 +42,7 @@
           pc1.onicecandidate = iceCallback;
 
           channels[data.from] = pc1.createDataChannel('sendDataChannel', { reliable: false });
-          channels[data.from].onmessage = channelMessageCallback;
+          channels[data.from].onmessage = handleMessage;
 
           pc1.createOffer(function (desc) {
             pc1.setLocalDescription(desc);
@@ -55,7 +55,7 @@
           pc2.onicecandidate = iceCallback;
           pc2.ondatachannel = function (event) {
             channels[data.from] = event.channel;
-            channels[data.from].onmessage = channelMessageCallback;
+            channels[data.from].onmessage = handleMessage;
           };
 
           pc2.setRemoteDescription(new RTCSessionDescription(data.desc));
@@ -72,6 +72,32 @@
         socket.on('disconnect', function (data) {
           delete peers[data.from];
         });
+
+        var handleMessage = function (event) {
+          console.log(event);
+
+          var channel = event.target;
+          var data = JSON.parse(event.data);
+
+          if (data.op == 'file-request') {
+            handleFileRequest(channel, data.hash);
+          }
+          else if (data.op == 'file-data') {
+            console.log(data.hash + ': ' + data.contents);
+          }
+        };
+
+        var handleFileRequest = function (channel, hash) {
+          var fileContents = files[hash];
+
+          if (fileContents) {
+            channel.send(JSON.stringify({
+              'op': 'file-data',
+              'hash': hash,
+              'contents': fileContents
+            }));
+          }
+        };
 
     </script>
 </body>
