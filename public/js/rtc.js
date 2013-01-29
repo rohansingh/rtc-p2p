@@ -84,7 +84,7 @@ var handleMessage = function (event) {
     handleFileRequest(channel, data.hash);
   }
   else if (data.op == 'file-data') {
-    console.log(data.hash + ': ' + data.contents);
+    handleFileData(channel, data.hash, data.contents);
   }
 };
 
@@ -109,4 +109,22 @@ var handleFileRequest = function (channel, hash) {
   };
 
   fileReader.readAsText(file);
+};
+
+var handleFileData = function (channel, hash, contents) {
+  var hashCell = $('<td></td>').text(hash);
+  var contentsCell = $('<td></td>').text(contents);
+
+  $('<tr></tr>').append(hashCell).append(contentsCell).appendTo('#received');
+}
+
+var requestFile = function (hash) {
+  for (var peerId in channels) {
+    if (channels.hasOwnProperty(peerId)) {
+      channels[peerId].send(JSON.stringify({
+        'op': 'file-request',
+        'hash': hash
+      }));
+    }
+  }
 };

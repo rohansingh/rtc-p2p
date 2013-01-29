@@ -48,6 +48,29 @@
         </div>
     </div>
 
+    <div class="row">
+      <div class="span12">
+        <h3>Received Files</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Hash</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody id="received"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="input-append">
+                <input class="span6" type="text" id="requestHash" name="requestHash" placeholder="SHA1 hash">
+                <button class="btn btn-primary" id="requestButton">Request File</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
     <script type="text/javascript">
         var files = {};
         var fileInput = document.getElementById('fileInput');
@@ -61,6 +84,13 @@
         $('#fileInput').change(function (event) {
           if (fileInput.files && fileInput.files[0]) {
             registerFile(fileInput.files[0]);
+          }
+        });
+
+        $('#requestButton').click(function (event) {
+          var hash = $('#requestHash').val();
+          if (hash) {
+            requestFile(hash);
           }
         });
     </script>
