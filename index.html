@@ -79,16 +79,19 @@ two things:</p>
 <ol>
 <li>
 <p>WebRTC requires a server or some sort of intermediary to exchange
-signalling and session data. This must be done before a connection
+signaling and session data. This must be done before a connection
 between two peers can be established.</p>
 
 <p>In this case, each peer communicates with the server using WebSockets to
-exchange signalling data with other peers.</p>
+exchange signaling data with other peers.</p>
 </li>
 <li><p>rtc-p2p uses a <a href="http://en.wikipedia.org/wiki/Web_worker">web worker</a> to
 compute the SHA1 hashes of registered files in the background. Web
 workers run on the client, but must be served from a server.</p></li>
-</ol>
+</ol><h2>Further Reading</h2>
+
+<p>Slides from my presentation on this project at <a href="http://www.meetup.com/sthlm-js/">sthlm.js</a>
+are available at: <a href="http://www.rvl.io/rohansingh/p2p">http://www.rvl.io/rohansingh/p2p</a></p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
