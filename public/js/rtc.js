@@ -77,7 +77,7 @@ socket.on('disconnect', function (data) {
 var handleMessage = function (event) {
   console.log(event);
 
-  var channel = event.target;
+  var channel = event.srcElement;
   var data = JSON.parse(event.data);
 
   if (data.op == 'file-request') {
