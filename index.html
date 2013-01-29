@@ -14,15 +14,14 @@
           optional: [{ RtpDataChannels: true }]
         };
 
-        var socket = io.connect('http://localhost:8000');
-        var pc = new RTCPeerConnection(servers, options);
-
         var peers = {};
         var channels = {};
 
         var files = {
           'abc': '12345'
         };
+
+        var socket = io.connect('http://localhost:8000');
 
         var iceCallback = function (event) {
           if (event.candidate) {
