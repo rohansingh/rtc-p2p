@@ -16,7 +16,7 @@ pc.onicecandidate = function (event) {
 };
 
 socket.on('candidate', function (data) {
-  var pcSend = receivers[data.from] = new PeerConnection(config);
+  var pcSend = receivers[data.from] = new RTCPeerConnection(config);
   pcSend.addIceCandidate(new RTCIceCandidate(data.candidate));
 
   pcSend.createOffer(function (desc) {
@@ -26,7 +26,7 @@ socket.on('candidate', function (data) {
 });
 
 socket.on('offer', function (data) {
-  var pcReceive = receivers[data.from] = new PeerConnection(config);
+  var pcReceive = receivers[data.from] = new RTCPeerConnection(config);
 
   pcReceive.setRemoteDescription(new RTCSessionDescription(offer.desc));
   pcReceive.createAnswer(pcReceive.remoteDescription, function (desc) {
