@@ -8,8 +8,8 @@ a proof of concept, and not actually optimized for any real world usage.
 Browser Compatibility
 ---------------------
 So far, this has only been tested with Chrome 26. **In order to work, the
-*Enable RTCDataChannel* must be enabled in Chrome** on the [chrome://flags](chrome://flags)
-configuration page.
+*Enable RTCDataChannel* flag must be enabled in Chrome** on the
+[chrome://flags](chrome://flags) configuration page.
 
 Limitations
 -----------
