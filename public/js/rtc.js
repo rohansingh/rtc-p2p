@@ -103,7 +103,7 @@ var handleFileRequest = function (channel, hash) {
       channel.send(JSON.stringify({
         'op': 'file-data',
         'hash': hash,
-        'contents': fileContents.substr(0, 50) // only support first 50 bytes for now
+        'contents': fileContents.substr(0, 100) // only support first few bytes for now
       }));
     }
   };
