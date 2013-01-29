@@ -65,16 +65,4 @@ io.sockets.on('connection', function (socket) {
   socket.broadcast.emit('new', {
     'from': nodeId
   });
-
-  /*
-  for (var room in io.sockets.manager.rooms) {
-    room = room.substr(1);
-
-    if (room && room != nodeId && io.sockets.clients(room)) {
-      socket.emit('candidate', {
-        'from': room
-      });
-    }
-  }
-  */
 });
