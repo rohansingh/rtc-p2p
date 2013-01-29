@@ -8,7 +8,6 @@ var options = {
 
 var peers = {};
 var channels = {};
-var files = {};
 
 var socket = io.connect('http://localhost:8000');
 
