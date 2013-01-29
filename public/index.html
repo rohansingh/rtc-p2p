@@ -36,13 +36,35 @@
               </tr>
             </thead>
             <tbody id="files"></tbody>
+            <tfoot>
+              <tr>
+                <td align="center">
+                  <input type="file" id="fileInput" name="fileInput" style="display:none">
+                  <button class="btn btn-primary" id="registerButton">Register File</button>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
     </div>
 
     <script type="text/javascript">
         var files = {};
+        var fileInput = document.getElementById('fileInput');
+
+        $('#registerButton').click(function (event) {
+          var clickEvent = document.createEvent('MouseEvents');
+          clickEvent.initEvent('click', true, false);
+          fileInput.dispatchEvent(clickEvent);
+        });
+
+        $('#fileInput').change(function (event) {
+          if (fileInput.files && fileInput.files[0]) {
+            registerFile(fileInput.files[0]);
+          }
+        });
     </script>
+
     <script type="text/javascript" src="js/rtc.js"></script>
     <script type="text/javascript" src="js/p2p.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>

@@ -1,6 +1,6 @@
 importScripts('FileStreamer.js', 'sha1.js', 'sha1_stream.js');
 
-worker = {
+var worker = {
   getSha1Hash: function (file, callback) {
     var head = naked_sha1_head();
 
@@ -29,7 +29,7 @@ self.addEventListener('message', function (event) {
   }
 
   if (message.action === 'getSha1Hash') {
-    hashupWorker.getSha1Hash(message.file, respondFunc);
+    worker.getSha1Hash(message.file, respondFunc);
   }
 }, false);
 

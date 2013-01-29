@@ -58,7 +58,7 @@ FileStreamer.prototype.streamFile = function (file, callback, readType, encoding
   var position = 0;
   var eof = false;
 
-  var sliceFunc = (file.webkitSlice) ? file.webkitSlice : file.mozSlice;
+  var sliceFunc = file.slice || file.webkitSlice || file.mozSlice;
   
   var readFunc;
   if (readType === 'text') {

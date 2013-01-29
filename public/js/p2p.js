@@ -1,5 +1,5 @@
 var getWorker = function () {
-  var worker = new Worker('worker.js');
+  var worker = new Worker('js/worker.js');
 
   if (worker.webkitPostMessage) {
     worker.postMessage = worker.webkitPostMessage;
@@ -8,11 +8,14 @@ var getWorker = function () {
   return worker;
 }
 
-var getSha1Hash = function (file) {
+var registerFile = function (file) {
   var worker = getWorker();
 
   worker.onmessage = function (event) {
-    files[event.data.result] = file;
+    var hash = event.data.result;
+
+    files[hash] = file;
+    $('<tr><td>' +  hash + '</td></tr>').appendTo('#files');
   };
 
   worker.postMessage({
